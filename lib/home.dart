@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-import 'package:html/dom.dart' as html;
 
 class MyHomePage extends StatelessWidget {
   final String title;
@@ -36,23 +35,20 @@ class MyHomePage extends StatelessWidget {
                       htmlContent,
                       textStyle: const TextStyle(fontSize: 16.0, height: 1.5),
                       customStylesBuilder: (node) {
-                        if (node is html.Element) {
-                          if (node.localName == 'p') {
-                            return {'margin-bottom': '16px'};
-                          }
-                          if (node.localName == 'img') {
-                            return {
-                              'display': 'block',
-                              'margin': '0 auto',
-                              'width': '50%',
-                            };
-                          }
+                        if (node.localName == 'p') {
+                          return {'margin-bottom': '16px'};
+                        }
+                        if (node.localName == 'img') {
+                          return {
+                            'display': 'block',
+                            'margin': '0 auto',
+                            'width': '60%',
+                          };
                         }
                         return null;
                       },
                       customWidgetBuilder: (node) {
-                        if (node is html.Element &&
-                            node.localName == 'dual-img') {
+                        if (node.localName == 'dual-img') {
                           final src1 = node.attributes['src1']!;
                           final src2 = node.attributes['src2']!;
                           final width =
@@ -64,8 +60,8 @@ class MyHomePage extends StatelessWidget {
 
                           return LayoutBuilder(
                             builder: (context, constraints) {
-                              final imageSize = (constraints.maxWidth - 100) /
-                                  2; // 100 is for spacing between images
+                              final imageSize = (constraints.maxWidth - 70) /
+                                  2; // 70 is for spacing between images
 
                               return Row(
                                 mainAxisAlignment:
@@ -73,7 +69,7 @@ class MyHomePage extends StatelessWidget {
                                 children: [
                                   SizedBox(
                                     width: imageSize,
-                                    height: imageSize - 50,
+                                    height: imageSize - 35,
                                     child: Image.asset(
                                       src1,
                                       fit: BoxFit.cover,
@@ -81,7 +77,7 @@ class MyHomePage extends StatelessWidget {
                                   ),
                                   SizedBox(
                                     width: imageSize,
-                                    height: imageSize - 50,
+                                    height: imageSize - 35,
                                     child: Image.asset(
                                       src2,
                                       fit: BoxFit.cover,
